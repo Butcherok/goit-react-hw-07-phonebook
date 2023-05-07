@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import ContactForm from './contactForm/contactForm';
 import Filter from './filter/filter';
 import ContactList from './contactList/contactList';
-import { getContacts, selectError, selectIsLoading } from '../redux/index';
+import { fetchContacts, selectError, selectIsLoading } from '../redux/index';
 import { Loader } from './loader/loader';
 import {
   ContactsTitle,
@@ -18,7 +18,7 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getContacts());
+    dispatch(fetchContacts());
     if (error) {
       alert.error(error);
     }
