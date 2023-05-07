@@ -1,4 +1,4 @@
-import { addContact } from 'redux/index';
+import { addContact, selectContacts } from '../../redux/index';
 import {
   AddContactBtn,
   NameInput,
@@ -10,7 +10,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function ContactForm() {
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const onSubmit = e => {
@@ -18,7 +18,7 @@ export default function ContactForm() {
     const form = e.currentTarget;
     const nameContact = form.elements.name.value.trim();
     const numberContact = form.elements.number.value.trim();
-    
+
     const searchTwins = contacts.some(
       contact =>
         contact.name.toLowerCase() ===
@@ -30,7 +30,7 @@ export default function ContactForm() {
       form.reset();
       return;
     }
-    dispatch(addContact(nameContact, numberContact));
+    dispatch(addContact({name: nameContact, phone: numberContact}));
 
     form.reset();
   };
@@ -44,7 +44,7 @@ export default function ContactForm() {
         id="nameContact"
         placeholder="Jack Jonson"
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batze Castelmore d'Artagnan"
         required
       />
       <NumberLabel htmlFor="numberContact">Number</NumberLabel>

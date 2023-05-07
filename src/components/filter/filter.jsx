@@ -1,9 +1,10 @@
 import { FilterInput, FilterLabel, Filters } from './filter.styled';
 import { useDispatch, useSelector } from 'react-redux';
+import { selectFilter } from '../../redux/index';
 import { filterList } from 'redux/index';
 
 export default function Filter() {
-  const filter = useSelector(state => state.filter);
+  const filter = useSelector(selectFilter);
   const dispatch = useDispatch();
 
   return (
